@@ -1,0 +1,109 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<common:LayoutAwarePage
+    x:Class="MediaCapture.LookCapture"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:$rootsnamespace$"
+    xmlns:viewModel="using:MediaCapture.ViewModel"
+    xmlns:common="using:SDKTemplate.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+      
+
+    <Grid x:Name="LayoutRoot" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="Input" Grid.Row="0">
+            <TextBlock x:Name="InputTextBlock1"  TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" >
+              This scenario demonstrates how to use the MediaCapture API to preview the camera stream, record a video, and take a picture using default initialization settings.
+              You can also adjust the brightness and contrast.
+            </TextBlock>
+        </Grid>
+
+        <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="ImmediateCapture" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" DataContext="{Binding Path=CurrentLook, Mode=TwoWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Width="Auto" Height="Auto" HorizontalAlignment="Center" Name="CaptureCommand" Text="{Binding Path=LookCommand }" />
+                <Grid Grid.Row="1" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Style="{StaticResource BasicTextStyle}"  HorizontalAlignment='Center'  VerticalAlignment='Center'  TextAlignment='Center'	Text='Preview' Grid.Row="0" />
+                    <Canvas x:Name="previewCanvas1" Width="320"  Height="240" Background="Gray" Grid.Row="1">
+                        <CaptureElement x:Name="previewElement1" Width="320" Height="240" Canvas.ZIndex="0" />
+<!--                    </Canvas>
+                    
+                    <Canvas x:Name="vv" Width="320" Height="240" Background="Gray" Grid.Row="2" > -->
+                        <Image x:Name="imageElement2"  Width="320"   Height="240" Canvas.ZIndex="1" />
+                    </Canvas>
+                </Grid>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" >
+                    <StackPanel x:Name="CapturePanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="btnTakePhoto1" Click="btnTakePhoto_Click" IsEnabled="false"  Margin="0,0,10,0" HorizontalAlignment="Center" >TakePhoto</Button>
+                    </StackPanel>
+                    <StackPanel x:Name="AcceptPanel" Orientation="Horizontal" Visibility="Visible" >
+                        <Button x:Name="btnAccept" Click="btnAccept_Click" IsEnabled="True" Margin="0,0,10,0" HorizontalAlignment="Center">Accept</Button>
+
+                        <Button x:Name="btnRetry" Click="btnRetry_Click"  IsEnabled="True" Margin="0,0,10,0" HorizontalAlignment="Center">Retry</Button>
+                        <Button x:Name="btnCancel" Click="btnCancel_Click"  IsEnabled="True" Margin="0,0,10,0" HorizontalAlignment="Center">Cancel</Button>
+                    </StackPanel>
+                    <StackPanel x:Name="CompletePanel" Orientation="Horizontal" Visibility="Collapsed">
+                        <Button x:Name="NextPair" Click="NextPair_Click" IsEnabled="True" Margin="0,0,10,0" HorizontalAlignment="Center">Next Pair</Button>
+                        <Button x:Name="Complete" Click="Complete_Click"  IsEnabled="True" Margin="0,0,10,0" HorizontalAlignment="Center">Done</Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <StackPanel x:Name="outputGridCol1" Orientation="Horizontal" Margin="0,10,0,0" Grid.Column="1" Width="320">
+                <TextBlock Text="Captured Images" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" />
+                <ItemsControl x:Name="CapturedLooks" ItemsSource="{Binding Path=Looks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Margin="2,0,0,0" Tapped="StackPanel_Tapped" Tag="{Binding Path=LookCommand}" >
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment='Center'  TextAlignment='Center' Text="{Binding Path=LookCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BasicTextStyle}" />
+                                <Canvas Width='160' Height ='120' Background="Gray">
+                                    <Image Source="{Binding Path=LookImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="160"   Height="120"/>
+                                </Canvas>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+
+            </Grid>
+        </Grid>
+
+        <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="DefaultLayout"/>
+                <VisualState x:Name="Below768Layout"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    
+
+</common:LayoutAwarePage>
