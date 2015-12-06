@@ -4,9 +4,9 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Thu Nov 26 00:20:23 2015
+/* at Sun Dec 06 01:40:25 2015
  */
-/* Compiler settings for C:\Users\jma42\AppData\Local\Temp\GrayscaleTransform.idl-e3532920:
+/* Compiler settings for C:\Users\jma42\AppData\Local\Temp\GrayscaleTransform.idl-75812af0:
     Oicf, W1, Zp8, env=Win64 (32b run), target_arch=AMD64 8.00.0603 
     protocol : dce , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 

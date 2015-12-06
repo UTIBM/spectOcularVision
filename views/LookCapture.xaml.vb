@@ -44,10 +44,15 @@ Partial Public NotInheritable Class LookCapture
     ' as NotifyUser()
     Private rootPage As MainPage = MainPage.Current
 
-    Private viewModel As New ViewModel.VisitorProductViewModel(0)
+    Private viewModel As ViewModel.VisitorProductViewModel
 
     Public Sub New()
         Me.InitializeComponent()
+        If rootPage.viewModel.ContainsKey(Me.GetType()) Then
+            viewModel = CType(rootPage.viewModel.Item(Me.GetType()), VisitorProductViewModel)
+        Else
+            viewModel = New ViewModel.VisitorProductViewModel(0)
+        End If
         ScenarioInit()
         m_mediaPropertyChanged = CType([Delegate].Combine(m_mediaPropertyChanged, New TypedEventHandler(Of SystemMediaTransportControls, SystemMediaTransportControlsPropertyChangedEventArgs)(AddressOf SystemMediaControls_PropertyChanged)), TypedEventHandler(Of SystemMediaTransportControls, SystemMediaTransportControlsPropertyChangedEventArgs))
         m_VMPropertyChanged = New PropertyChangedEventHandler(Sub(sender As Object, args As PropertyChangedEventArgs)
@@ -60,7 +65,6 @@ Partial Public NotInheritable Class LookCapture
                                                                           'CaptureCommand.UpdateLayout()
                                                                   End Select
                                                               End Sub)
-
 
     End Sub
 

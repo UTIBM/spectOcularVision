@@ -11,6 +11,9 @@
         Private _ProductID As Guid
 #End Region
 #Region "New"
+        Public Sub New()
+
+        End Sub
         Public Sub New(v As visitorModel, p As productItemsModel)
             _visitorProductModel = New VisitorProductModel(v.MerchID, v.StoreID, v.VisitorID, p.ProductItemID, p.ProductName)
             _looks = New Dictionary(Of String, LookViewModel)

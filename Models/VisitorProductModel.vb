@@ -44,6 +44,16 @@ Public Class VisitorProductModel
         Me.New(productID, product)
         Me.Looks.AddRange(looks)
     End Sub
+    Public Sub New(sample As Integer)
+        VisitorProductID = Guid.NewGuid
+
+        timestamp = Date.Now()
+        Me.Looks = New List(Of LookModel)
+        Select Case sample
+            Case 0
+                Me.Product = "Cool Pair"
+        End Select
+    End Sub
 
 
 End Class

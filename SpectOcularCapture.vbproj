@@ -41,6 +41,9 @@
     <Compile Include="Models\visitorModel.vb" />
     <Compile Include="Models\VisitorProductModel.vb" />
     <Compile Include="ViewModels\StoreViewModel.vb" />
+    <Compile Include="views\ProductVisitorView.xaml.vb">
+      <DependentUpon>ProductVisitorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\VisitorView.xaml.vb">
       <DependentUpon>VisitorView.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Page Include="views\LookCapture.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="views\ProductVisitorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

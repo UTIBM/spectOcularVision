@@ -24,7 +24,7 @@ Imports MediaCapture.ViewModel
 ''' <summary>
 ''' An empty page that can be used on its own or navigated to within a Frame.
 ''' </summary>
-Partial Public NotInheritable Class VisitorView
+Partial Public NotInheritable Class ProductVisitorView
     Inherits SDKTemplate.Common.LayoutAwarePage
 
     Private m_capture As Windows.Media.Capture.MediaCapture
@@ -45,7 +45,7 @@ Partial Public NotInheritable Class VisitorView
     Private m_pastFrame As UInteger
     Private m_futureFrame As UInteger
 
-    Private viewModel As VisitorViewModel
+    Private viewModel As VisitorProductViewModel
 
     Private ReadOnly PHOTOSEQ_FILE_NAME As String = "photoSequence.jpg"
 
@@ -63,9 +63,9 @@ Partial Public NotInheritable Class VisitorView
                                                                   End Select
                                                               End Sub)
         If rootPage.viewModel.ContainsKey(Me.GetType()) Then
-            viewModel = CType(rootPage.viewModel.Item(Me.GetType()), VisitorViewModel)
+            viewModel = CType(rootPage.viewModel.Item(Me.GetType()), VisitorProductViewModel)
         Else
-            viewModel = New VisitorViewModel(New visitorModel(0))
+            viewModel = New VisitorProductViewModel(New VisitorProductModel(0))
         End If
     End Sub
 
@@ -104,7 +104,7 @@ Partial Public NotInheritable Class VisitorView
 
     Private Sub OnScenarioLoaded(sender As Object, e As EventArgs)
         Me.DataContext = viewModel
-        ProductList.ItemsSource = viewModel.ProductViews
+
     End Sub
 
     Private Sub ShowStatusMessage(ByVal text As String)
@@ -159,26 +159,10 @@ Partial Public NotInheritable Class VisitorView
     End Sub
 
     Private Sub AddNewGlasses_Click(sender As Object, e As RoutedEventArgs)
-        Dim glassType = CType(Me.FindName("tbGlassName"), TextBox)
-        If glassType Is Nothing Then
-            glassType = New TextBox
-            glassType.Text = "AA"
-        End If
-        Dim vpm = New VisitorProductModel(Guid.NewGuid, glassType.Text)
-            Dim vpvm = New VisitorProductViewModel(vpm)
-            viewModel.ProductViews.Add(vpvm)
-
-            If rootPage.viewModel.ContainsKey(GetType(LookCapture)) Then
-                rootPage.viewModel.Item(GetType(LookCapture)) = vpvm
-            Else
-                rootPage.viewModel.Add(GetType(LookCapture), vpvm)
-            End If
-            rootPage.LoadScenario(GetType(LookCapture))
 
     End Sub
 
     Private Sub Button_Tapped(sender As Object, e As TappedRoutedEventArgs)
 
     End Sub
-
 End Class

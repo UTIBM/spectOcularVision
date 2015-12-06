@@ -13,6 +13,7 @@ Namespace ViewModel
         Public Sub New(lookModel As LookModel)
             _lookModel = lookModel
             ConvertFromLookModel(_lookModel)
+            LookCommand = "AXX"
         End Sub
 
         Public Sub New(visitorProductViewModel As ViewModel.VisitorProductViewModel, LookCommand As String, Image As BitmapImage, ViewState As lookModelEnum)

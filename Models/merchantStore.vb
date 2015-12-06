@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
-
+Imports Windows.UI.Xaml.Media.Imaging
+Imports System.IO
 
 
 Public Class merchantStore
@@ -38,9 +39,23 @@ Public Class merchantStore
                 MerchantID = Guid.NewGuid
                 visitors = New List(Of visitorModel)
                 Dim tmpVisitor As New visitorModel("Jeff", New VisitorProductModel(Guid.NewGuid, "CoolA"))
+                tmpVisitor.VisitorProducts.Item(0).Looks = New List(Of LookModel)
+
+
+                Dim lm As New LookModel("Straight On", loadBitmap("C:\Users\jma42\Pictures\photo (66).jpg"))
+                tmpVisitor.VisitorProducts.Item(0).Looks.Add(lm)
                 visitors.Add(tmpVisitor)
         End Select
     End Sub
+#Region "Helper"
+    Private Function loadBitmap(filename As String) As BitmapImage
+        Dim myBitmap As New BitmapImage(New System.Uri(filename))
+        Return myBitmap
+
+    End Function
+
+
+#End Region
 #Region "INotifyPropertyChanged members"
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
     Public Sub OnPropertyChanged(propertyName As String)

@@ -151,8 +151,13 @@ Partial Public NotInheritable Class VisitorSelectView
 
     Private Sub Border_Tapped(sender As Object, e As TappedRoutedEventArgs)
 
+
+
+    End Sub
+
+    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
         For Each VVM As VisitorViewModel In viewModel.Visitors
-            If VVM.VisitorID = CType(CType(sender, Border).Tag, Guid) Then
+            If VVM.VisitorID = CType(CType(sender, Button).Tag, Guid) Then
                 If rootPage.viewModel.ContainsKey(GetType(VisitorView)) Then
                     rootPage.viewModel.Item(GetType(VisitorView)) = VVM
                 Else
@@ -162,6 +167,5 @@ Partial Public NotInheritable Class VisitorSelectView
             End If
         Next
         rootPage.LoadScenario(GetType(VisitorView))
-
     End Sub
 End Class

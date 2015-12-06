@@ -11,7 +11,7 @@
 -->
 
 <common:LayoutAwarePage
-    x:Class="MediaCapture.VisitorSelectView"
+    x:Class="MediaCapture.VisitorView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:$rootsnamespace$"
@@ -20,11 +20,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <common:LayoutAwarePage.Resources>
-        <BitmapImage x:Key="smallTitle" UriSource="Assets/smallTile-sdk.png" />
-    </common:LayoutAwarePage.Resources>
+    
     <common:LayoutAwarePage.DataContext>
-        <viewModel:StoreViewModel/>
+        <viewModel:VisitorProductViewModel />
     </common:LayoutAwarePage.DataContext>
     <Grid x:Name="LayoutRoot" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
         <Grid.RowDefinitions>
@@ -49,25 +47,26 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                <TextBlock Text="Select a Person"/>
-                <Button x:Name="AddNewVisitor" Click="AddNewVisitor_Click">Add New Visitor</Button>
+                <TextBlock FontSize="24" Text="Select a View" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Margin="10,0,10,0"/>
+                <AppBarSeparator Margin="10,0,20,0" />
+                <Button x:Name="AddNewGlasses" Click="AddNewGlasses_Click"  Margin="20,0,20,0">Add New Pair</Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10,-740,0" Grid.Row="1" Grid.Column="0">
-                <ItemsControl x:Name="VisitorList" ItemsSource="{Binding Path=Visitors, Mode=OneWay}">
+            <StackPanel Orientation="Horizontal" Margin="0,10,-515,0" Grid.Row="1" Grid.Column="0">
+                <ItemsControl x:Name="ProductList" ItemsSource="{Binding Path=ProductViews, Mode=OneWay}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="Aquamarine" BorderThickness="3" CornerRadius="2" Holding="Border_Holding" Tapped="Border_Tapped" >
-                                <Button Click="Button_Click"  Tag="{Binding Path=VisitorID}" >
+                                <Button Tag="{Binding Path=VisitorProductID}" Tapped="Button_Tapped">
                                     <Button.Template>
                                         <ControlTemplate>
-                                            <Grid>
-                                                <Image Source="{Binding Path=Image, TargetNullValue={StaticResource smallTitle}}" Width="160" Height="120"/>
-                                                <TextBlock Text="{Binding Path=VisitorName, TargetNullValue=xxx}" />
+                                <Grid>
+                                    <Image Source="{Binding Path=CurrentLook.LookImage}" Width="160" Height="120"/>
+                                    <TextBlock Text="{Binding Path=ProductName, TargetNullValue=xxx}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                             </Grid>
                                         </ControlTemplate>
                                     </Button.Template>
                                 </Button>
-                                
+                     
                             </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

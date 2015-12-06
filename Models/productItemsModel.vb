@@ -16,4 +16,12 @@
         ProductItemID = Guid.NewGuid
         ProductName = product
     End Sub
+    Public Sub New(sample As Integer)
+        ProductItemID = Guid.NewGuid
+
+        Select Case sample
+            Case 0
+                ProductName = "Cool Glasses"
+        End Select
+    End Sub
 End Class
